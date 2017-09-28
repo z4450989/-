@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+		*{margin:0;padding:0;list-style: none;}
+		button{
+			width:70px;
+
+		}
+		#yazhufj{
+			width:450px;
+			height:60px;
+			/*background:red;*/
+
+		}
+		.yazhu{
+			width:70px;
+			height:30px;
+			background:red;
+			float: left;
+			margin-left:10px;
+		}
+
+		.qcfd{
+			clear: left;
+		}
+		#xiaoshu{
+			width:100%;
+			height:50px;
+			/*background:blue;*/
+		}
+		#xiaoshu>span{
+			display: block;
+			text-align: center;
+			width:20px;
+			height:20px;
+			border-radius: 50%;
+			float: left;
+			background:pink;
+			margin-left:10px;
+		}
+    </style>
+</head>
+<body>
+	<h3 id="shiqizhi"></h3>
+	<div id='daojishi'></div>
+	<br>
+	<div id="yazhufj">
+	<div class="yazhu">
+		小单x:<span class="yazf">0</span>
+		<button>押注</button>
+	</div>
+		<div class="yazhu">
+		大单x:<span class="yazf">0</span>
+		<button>押注</button>
+	</div>
+		<div class="yazhu">
+		小双x:<span class="yazf">0</span>
+		<button>押注</button>
+	</div>
+		<div class="yazhu">
+		大双x:<span class="yazf">0</span>
+		<button>押注</button>
+	</div>
+	</div>
+	<!-- 这里清除浮动 -->
+	<div class="qcfd"></div>
+	<div id="xiaoshu">
+		<span>0</span>
+		<span>1</span>
+		<span>2</span>
+		<span>3</span>
+		<span>4</span>
+		<span>5</span>
+		<span>6</span>
+		<span>7</span>
+		<span>8</span>
+		<span>9</span>
+		<span>10</span>
+		<span>11</span>
+		<span>12</span>
+		<span>13</span>
+		<br>
+		<span>14</span>
+		<span>15</span>
+		<span>16</span>
+		<span>17</span>
+		<span>18</span>
+		<span>19</span>
+		<span>20</span>
+		<span>21</span>
+		<span>22</span>
+		<span>23</span>
+		<span>24</span>
+		<span>25</span>
+		<span>26</span>
+		<span>27</span>
+	</div>
+
+	<h1>功能完善中.......</h1>
+</body>
+<script src="./jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+// 定义分钟为了让程序简单点
+	var sj=4;
+// 这里定义秒钟
+	var sj1=60;
+	alert('来来下注了5分钟时时彩，百万大奖等你拿');
+	// 这里定义一个定时器函数
+	function shijiana(){
+		// 设置一个时间对象
+		var mydate = new Date();
+		// 获取时间对象里的当前时间
+		var sdf=mydate.toLocaleString();
+		// 这里获取的是时间里面的当前分钟
+		var sdsad=mydate.getMinutes()
+		// console.log(sdsad);
+		// console.log(sdsad);
+		// 这里是让当前的时间赋值到元素内容里面
+		$('#shiqizhi').html(sdf);
+		// 这里的秒钟 每秒递减
+		sj1--;
+		if(sj1==0){
+			sj--;
+			sj1=60;
+		}
+		// 这里分钟判断递减
+		if(sj==0){
+			// 这里就调用函数进行开奖
+			// 随机开出的奖是0到27的数
+			sj=4;
+			alert('开奖结果是'+suijishu());
+		}
+		// 这里是开奖的倒计时
+		$('#daojishi').html('开奖倒计时:'+sj+'分'+sj1+'秒');
+		return sdsad;
+	}
+	// 页面一加载就运行程序
+	shijiana();
+	// 定时器
+	setInterval(function(){
+		// 每秒进行调用一次时间函数
+		shijiana()
+	},1000)
+
+		// 这里定义当前的数是一个什么类型
+		var danshuang;
+
+		// 这是设置一个随机函数
+		function suijishu(){
+
+			var num = Math.floor(Math.random()*(0+27))
+			// 这里判断当前的数是什么类型
+			if(num%2==0){
+				if(num>=14){
+					danshuang='大双';
+				}
+			}
+			if(num%2==0){
+				if(num<=12){
+					danshuang='小双';
+				}
+			}
+			if(num%2==1){
+				if(num<=13){
+					danshuang='小单';
+				}
+			}
+			if(num%2==1){
+				if(num>=15){
+					danshuang='大单';
+				}
+			}
+			return num+danshuang;
+		}
+
+		// 这里是用做单击的
+		var sfdsa=0;
+		// 这里是当前点击的里面的值进行累加
+		$('.yazhu').click(function(){
+			if($(this).index()==$(this).index()){
+				$('.yazf').eq($(this).index()).html(sfdsa++);
+			}else{
+				console.log($('.yazf').html());
+				// sfdsa=$('.yazf').html();
+				$('.yazf').eq($(this).index()).html(sfdsa++);	
+			}
+		})
+</script>
+</html>
